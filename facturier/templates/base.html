@@ -1,0 +1,39 @@
+{% load static %}
+{% load sass_tags %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Facturier</title>
+    <link href="{% sass_src 'style.scss' %}" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>bonjoir</h1>
+        <div class="container">
+            <nav class="navbar">
+
+                <ul class="nav navbar-nav">
+                    <li><a href="{% url "home" %}">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <input id="search"/>
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </main>
+    <footer>
+        <p>itsafooter</p>
+    </footer>
+
+<script src="{% static 'external/jquery/dist/jquery.js' %}"></script>
+{% block scripts %}
+{% endblock scripts %}
+</body>
+</html>
