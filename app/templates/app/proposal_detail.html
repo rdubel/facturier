@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Proposal n°{{proposal.id}}</h3>
+<h4>Clerk : {{proposal.owner.username}}</h4>
+<h4>Client : {{proposal.client.first_name}} {{proposal.client.last_name}}</h4>
+<p>Status : {{proposal.status.status}}</p>
+
+<div class="separator"></div>
+<h5>Services proposed :</h5>
+<ul class="list-unstyled">
+{% for service in view.services %}
+    <li>{{service.quantity}} {{service.service_name}} at {{service.unit_price}}€ each.</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

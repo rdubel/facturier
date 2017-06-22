@@ -5,7 +5,7 @@
 
 <ul>
 {% for proposal in object_list %}
-<li><a href="#">{{proposal.status.status}} : {{proposal.owner.username}} - {{proposal.client.last_name}} | id: {{proposal.id}}</a></li>
+<li><a href="{% url 'proposal_detail' proposal.id %}">{{proposal.status.status}} : {{proposal.owner.username}} - {{proposal.client.last_name}} | id: {{proposal.id}}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}
