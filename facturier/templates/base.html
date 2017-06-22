@@ -16,9 +16,9 @@
             <nav class="navbar">
                 <ul class="nav navbar-nav">
                     <li><a href="{% url "home" %}">Home</a></li>
-                    <li><a href="#">Proposal list</a></li>
+                    <li><a href="{% url 'proposal-list' %}">Proposal list</a></li>
                     {% if request.user.is_authenticated %}
-                    <li><a href="#"> your profile</a></li>
+                    <li><a href="#">Welcome, {{request.user.username}}</a></li>
                     <li><a href="{% url 'account_logout' %}">Log Out</a></li>
                     {% else %}
                     <li><a href="{% url 'account_login' %}">Log In</a></li>
@@ -30,13 +30,11 @@
     </header>
     <main>
         <div class="container">
-            <input id="search"/>
             {% block content %}
             {% endblock content %}
         </div>
     </main>
     <footer>
-        <p>itsafooter</p>
     </footer>
 
 <script src="{% static 'external/jquery/dist/jquery.js' %}"></script>

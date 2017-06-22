@@ -5,4 +5,21 @@ body {
     h1 {
         text-align: center;
     }
+    nav {
+        background-color: darken(grey, 15%);
+        margin: 3em 0;
+        display: flex;
+        justify-content: space-between;
+        li {
+            margin: 0 2em;
+            a {
+                color: white;
+                border-radius: 3px;
+
+            }
+            a:hover {
+                color: darken(grey, 15%);
+            }
+        }
+    }
 }
