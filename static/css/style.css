@@ -5815,6 +5815,8 @@ button.close {
     display: none !important; } }
 
 body {
-  background-color: green; }
+  background-color: #89dcfa; }
+  body h1 {
+    text-align: center; }
 
 /*# sourceMappingURL=../../../../../../../static/style.css.map */

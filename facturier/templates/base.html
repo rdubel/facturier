@@ -11,12 +11,18 @@
 </head>
 <body>
     <header>
-        <h1>bonjoir</h1>
+        <h1>Facturier</h1>
         <div class="container">
             <nav class="navbar">
-
                 <ul class="nav navbar-nav">
                     <li><a href="{% url "home" %}">Home</a></li>
+                    <li><a href="#">Proposal list</a></li>
+                    {% if request.user.is_authenticated %}
+                    <li><a href="#"> your profile</a></li>
+                    <li><a href="{% url 'account_logout' %}">Log Out</a></li>
+                    {% else %}
+                    <li><a href="{% url 'account_login' %}">log in</a></li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>
