@@ -12,6 +12,7 @@ class Client(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
+    
     def __unicode__(self):
         return self.first_name + " " + self.last_name
 
@@ -19,6 +20,9 @@ class Client(models.Model):
 class Status(models.Model):
 
     status = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = "Statuses"
 
     def __unicode__(self):
         return self.status

@@ -152,6 +152,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+BOWER_INSTALLED_APPS = (
+    'jquery',
+    'bootstrap-sass',
+)
+
+
 BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR)
 
 SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR, "static/css")
