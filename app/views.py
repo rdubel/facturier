@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, reverse
+from django.views.generic import ListView, DetailView, CreateView
 from .models import *
+from .forms import ProposalInlineFormSet
 
 # Create your views here.
 class ProposalListView(ListView):
@@ -18,3 +19,29 @@ class ProposalDetailView(DetailView):
     def services(self):
 
         return Service.objects.filter(proposal=self.object.id)
+
+class ProposalCreateView(CreateView):
+
+    model = Proposal
+    fields = "__all__"
+
+    def line(self):
+        if self.request.POST:
+            return ProposalInlineFormSet(self.request.POST)
+        else:
+            return ProposalInlineFormSet()
+
+    def form_valid(self, form):
+
+        lines = self.line()
+        proposal = form.save()
+
+        if lines.is_valid():
+
+            lines.instance = proposal
+            lines.save(form)
+
+        return super(ProposalCreateView, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse('proposal_detail', kwargs={'pk' : self.object.id})
