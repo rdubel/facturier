@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Proposal Edition</h3>
+<form action="#" method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+    <p>-----------------------------------------------------------</p>
+
+    {{view.line.as_p}}
+    <input type="submit" name="submit" value="Submit">
+</form>
+
+{%  endblock %}
