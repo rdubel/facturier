@@ -12,7 +12,7 @@ class Client(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
-    
+
     def __unicode__(self):
         return self.first_name + " " + self.last_name
 
@@ -33,6 +33,12 @@ class Proposal(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.ForeignKey(Status,on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
+
+    def amount(self):
+        result = 0
+        for service in self.service_set.all():
+            result += service.unit_price * service.quantity
+        return result
 
     def __unicode__(self):
         return self.status.status + " - " + self.owner.username + " - " + self.client.last_name + " | id : " + str(self.id)

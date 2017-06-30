@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Client page</h2>
+<p>First name : {{client.first_name}}</p>
+<p>Last name : {{client.last_name}}</p>
+<p>Mail : {{client.email}}</p>
+<p>Proposals : </p>
+<ul>
+{% for proposal in view.proposals %}
+    <li><a href="{% url 'proposal_detail' proposal.id %}">clerk : {{proposal.owner}} | status : {{proposal.status.status}} | price : {{proposal.amount}}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

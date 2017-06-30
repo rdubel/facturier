@@ -48,6 +48,7 @@ class ProposalCreateView(CreateView):
     def get_success_url(self):
         return reverse('proposal_detail', kwargs={'pk' : self.object.id})
 
+
 class ProposalUpdateView(UpdateView):
     model = Proposal
     fields = "__all__"
@@ -79,3 +80,18 @@ class ProposalUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('proposal_detail', kwargs={'pk' : self.object.id})
+
+class ClientCreateView(CreateView):
+    model = Client
+    fields = "__all__"
+
+    def get_success_url(self):
+        return reverse('client_detail', kwargs={'pk' : self.object.id})
+
+class ClientDetailView(DetailView):
+
+    model = Client
+    pk_field = "id"
+
+    def proposals(self):
+        return Proposal.objects.filter(client=self.object)
