@@ -1,11 +1,52 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>Proposal List</h3>
+<h2>Proposal Lists</h2>
 
-<ul>
+<h4>Pending proposals :</h4>
+<ul id="pendingprops">
 {% for proposal in object_list %}
-<li><a href="{% url 'proposal_detail' proposal.id %}">{{proposal.status.status}} : {{proposal.owner.username}} - {{proposal.client.last_name}} | id: {{proposal.id}}</a></li>
+{% if proposal.owner.username == request.user.username and proposal.status.status == 'Pending' %}
+
+<li><a href="{% url 'proposal_detail' proposal.id %}">Proposal N°{{proposal.id}} | Status : {{proposal.status.status}} | Client : {{proposal.client.last_name}} | Estimation : {{proposal.amount}}€ </a></li>
+
+{% endif %}
 {% endfor %}
 </ul>
+
+<h4>Bills :</h4>
+<ul id="bills">
+{% for proposal in object_list %}
+{% if proposal.owner.username == request.user.username and proposal.status.status == 'Waiting for payment' %}
+
+<li><a href="{% url 'proposal_detail' proposal.id %}">Proposal N°{{proposal.id}} | Status : {{proposal.status.status}} | Client : {{proposal.client.last_name}} | Estimation : {{proposal.amount}}€ </a></li>
+
+{% endif %}
+{% endfor %}
+</ul>
+
+<h4>Paid bills :</h4>
+<ul id="bills">
+{% for proposal in object_list %}
+{% if proposal.owner.username == request.user.username and proposal.status.status == 'Paid' %}
+
+<li><a href="{% url 'proposal_detail' proposal.id %}">Proposal N°{{proposal.id}} | Status : {{proposal.status.status}} | Client : {{proposal.client.last_name}} | Estimation : {{proposal.amount}}€ </a></li>
+
+{% endif %}
+{% endfor %}
+</ul>
+
+
+<h4>Archived proposals :</h4>
+<ul id="bills">
+{% for proposal in object_list %}
+{% if proposal.owner.username == request.user.username and proposal.status.status == 'Archived' %}
+
+<li><a href="{% url 'proposal_detail' proposal.id %}">Proposal N°{{proposal.id}} | Status : {{proposal.status.status}} | Client : {{proposal.client.last_name}} | Estimation : {{proposal.amount}}€ </a></li>
+
+{% endif %}
+{% endfor %}
+</ul>
+
+
 {% endblock %}

@@ -1,15 +1,41 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
-<h3>Proposal Creation</h3>
-<form action="#" method="post">
+
+{% if view.usage == "create" %}
+<h2>Proposal Creation</h2>
+{% elif view.usage == "update" %}
+<h2>Proposal Update</h2>
+{% endif %}
+
+<form id="myform" action="#" method="post">
+
 {%csrf_token%}
 {{form.as_p}}
-<p>-----------------------------------------------------------</p>
-<table>
-{{view.line.as_table}}
-</table>
-<input type="submit" name="submit" value="Submit">
+{{view.line.management_form}}
+{% for inline_form in view.line %}
+
+<div class="lel">
+
+    {{inline_form}}
+
+</div>
+
+{% endfor %}
+
+<br><input type="submit" name="submit" value="Submit">
 </form>
 
 {%  endblock %}
+{% block scripts %}
+
+<script src="{% static 'external/formset/jquery.formset.js' %}" charset="utf-8"></script>
+<script type="text/javascript">
+    $(function() {
+        $('#myform .lel').formset({
+            prefix: '{{ view.line.prefix }}'
+        });
+    })
+</script>
+
+{% endblock %}

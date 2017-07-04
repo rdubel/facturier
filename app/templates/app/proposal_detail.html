@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>Proposal n°{{proposal.id}} | <a href="{% url 'proposal_update' proposal.id %}">Edit</a></h3>
+<h2>Proposal n°{{proposal.id}} | <a href="{% url 'proposal_update' proposal.id %}">Edit</a></h2>
 <h4>Clerk : {{proposal.owner.username}}</h4>
 <h4>Client : {{proposal.client.first_name}} {{proposal.client.last_name}}</h4>
 <p>Status : {{proposal.status.status}}</p>
 
 <div class="separator"></div>
 <h5>Services proposed :</h5>
-<ul class="list-unstyled">
+<ul class="list">
 {% for service in view.services %}
-    <li>{{service.quantity}} {{service.service_name}} at {{service.unit_price}}€ each.</li>
+    <li>Name : {{service.service_name}} | Quantity : {{service.quantity}} | Unit price : {{service.unit_price}}€ | Subtotal : {{service.service_price}}€</li>
 {% endfor %}
 </ul>
-
+<p>For a total of {{proposal.amount}} €</p>
+<a id="confirm" class="btn-success" href="">Confirm</a>
+<a id="dismiss" class="btn-danger" href="">Dismiss</a>
 {% endblock %}

@@ -25,7 +25,7 @@ class ProposalDetailView(DetailView):
 class ProposalCreateView(CreateView):
 
     model = Proposal
-    fields = "__all__"
+    fields = ['client']
 
     def line(self):
         if self.request.POST:
@@ -33,9 +33,14 @@ class ProposalCreateView(CreateView):
         else:
             return ProposalInlineFormSet()
 
+    def usage(self):
+        return "create"
+
     def form_valid(self, form):
 
         lines = self.line()
+        form.instance.owner = self.request.user
+        form.instance.status = Status.objects.get(id=1)
         proposal = form.save()
 
         if lines.is_valid():
@@ -51,7 +56,11 @@ class ProposalCreateView(CreateView):
 
 class ProposalUpdateView(UpdateView):
     model = Proposal
-    fields = "__all__"
+    fields = ['client']
+
+    def usage(self):
+        return "update"
+
 
     def line(self):
         if self.request.POST:

@@ -50,3 +50,6 @@ class Service(models.Model):
     unit_price = models.DecimalField(max_digits=8, decimal_places=2)
     quantity = models.SmallIntegerField()
     proposal = models.ForeignKey(Proposal, on_delete=models.CASCADE)
+
+    def service_price(self):
+        return self.unit_price * self.quantity

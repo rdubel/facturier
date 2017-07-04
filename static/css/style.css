@@ -5818,6 +5818,22 @@ body {
   background-color: #89dcfa; }
   body h1 {
     text-align: center; }
+  body h2 {
+    text-align: center; }
+  body a {
+    color: #990000; }
+  body a:hover {
+    color: red; }
+  body #confirm {
+    padding: 0.5em 1em; }
+  body #confirm {
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    border: 1px solid lightgreen; }
+  body #dismiss {
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    border: 1px solid #ff4d4d; }
   body nav {
     background-color: #5a5a5a;
     margin: 3em 0;
@@ -5830,5 +5846,11 @@ body {
         border-radius: 3px; }
       body nav li a:hover {
         color: #5a5a5a; }
+  body .lel:first-of-type {
+    border-top: 2px dashed black;
+    margin-top: 1em;
+    padding-top: 1em; }
+  body .lel:not(:first-of-type) {
+    margin: 1em 0; }
 
 /*# sourceMappingURL=../../../../../../../static/style.css.map */
