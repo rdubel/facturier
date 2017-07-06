@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.db import transaction
+from django.http import Http404
 
 from .models import *
 from .forms import ProposalInlineFormSet
@@ -59,7 +60,7 @@ class ProposalUpdateView(UpdateView):
     fields = ['client']
 
     def usage(self):
-        return "update"
+        return "update "
 
 
     def line(self):
@@ -104,3 +105,24 @@ class ClientDetailView(DetailView):
 
     def proposals(self):
         return Proposal.objects.filter(client=self.object)
+
+def ProposalToBill(request, pk):
+
+    project = Proposal.objects.get(id=pk)
+    if project:
+        project.status = Status.objects.get(id=3)
+        project.save()
+        return redirect('proposal_detail', pk=pk)
+    else:
+        raise Http404("this project does not exist")
+
+
+def ProposalArchiving(request, pk):
+
+    project = Proposal.objects.get(id=pk)
+    if project:
+        project.status = Status.objects.get(id=2)
+        project.save()
+        return redirect('proposal_detail', pk=pk)
+    else:
+        raise Http404("this project does not exist")
