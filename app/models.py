@@ -33,6 +33,8 @@ class Proposal(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.ForeignKey(Status,on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    creation_date = models.DateTimeField(null=True, blank=True)
+    update_date = models.DateTimeField(null=True, blank=True)
 
     def amount(self):
         result = 0
@@ -53,3 +55,6 @@ class Service(models.Model):
 
     def service_price(self):
         return self.unit_price * self.quantity
+
+    def __unicode__(self):
+        return self.service_name
